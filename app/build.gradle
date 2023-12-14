@@ -80,5 +80,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3"
 
+    //RxJava RxKotlin
+    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
+
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
 }

@@ -12,6 +12,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ben.weatherapp.Data.WeatherData
+import io.reactivex.rxjava3.subjects.BehaviorSubject
+import io.reactivex.rxjava3.subjects.Subject
 
 @Composable
 fun WeatherForecast(
@@ -22,6 +24,9 @@ fun WeatherForecast(
     // where get(0) is for today
     state.dailyData?.weatherDataPerDay?.get(0)?.let{  data ->
 
+        var appropriateWeatherData:WeatherData
+        val weatherDataSubject: Subject<WeatherData> = BehaviorSubject.create()
+        weatherDataSubject.subscribe{updatedData -> appropriateWeatherData = updatedData}
     Column(
             modifier = modifier
                 .fillMaxWidth()
@@ -30,14 +35,12 @@ fun WeatherForecast(
 
 
         ) {
-            Text(
-                text = "Today",
-                fontSize = 20.sp,
-                color = Color.White
-            )
+            DateOptionsButton(DayName = "Today",state)
             Spacer(modifier = Modifier.height(16.dp))
             LazyRow(content = {
-              items(data) { item: WeatherData ->
+//                items(appropriateWeatherData) { item: WeatherData ->
+
+                items(data) { item: WeatherData ->
                   HourlyWeatherDisplay(item,
                   modifier = Modifier
                       .height(100.dp)
